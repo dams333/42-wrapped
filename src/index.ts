@@ -4,6 +4,7 @@ import { fetchLocations } from './fetchers/locationFetcher';
 import { open } from 'sqlite';
 import { setupDb } from './db';
 import { fetchAchievments } from './fetchers/achievmentsFetcher';
+import { fetchProjects } from './fetchers/projectsFetcher';
 
 (async function () {
 	const client = new Client(
@@ -34,6 +35,7 @@ import { fetchAchievments } from './fetchers/achievmentsFetcher';
 		setupDb(db);
 		// await fetchLocations(client, userId, year, db);
 		// await fetchAchievments(client, userId, year, db);
+		await fetchProjects(client, userId, year, db);
 	} catch (e) {
 		console.log(e);
 	}
