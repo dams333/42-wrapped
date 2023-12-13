@@ -67,4 +67,46 @@ export async function setupDb(db: Database) {
 			collaborations TEXT
 		)
 	`);
+	await db.run(`
+		CREATE TABLE evaluation_corrector_raw (
+				id INTEGER PRIMARY KEY,
+				project TEXT,
+				evaluated_at TEXT,
+				evaluated_team INTEGER,
+				evaluated_logins TEXT,
+				final_mark INTEGER,
+				is_validated INTEGER,
+				comment TEXT,
+				feedback TEXT,
+				feedback_rated INTEGER,
+				flag TEXT
+			)
+	`);
+	await db.run(`
+		CREATE TABLE evaluation_corrector_connexion (
+			login TEXT PRIMARY KEY,
+			count INTEGER
+		)
+	`);
+	await db.run(`
+		CREATE TABLE evaluation_corrected_raw (
+			id INTEGER PRIMARY KEY,
+			evaluated_at TEXT,
+			project_id INTEGER,
+			team_id INTEGER,
+			evaluator TEXT,
+			final_mark INTEGER,
+			comment TEXT,
+			feedback TEXT,
+			feedback_rated INTEGER,
+			flag TEXT,
+			is_validated INTEGER
+		)
+	`);
+	await db.run(`
+		CREATE TABLE evaluation_corrected_connexion (
+			login TEXT PRIMARY KEY,
+			count INTEGER
+		)
+	`);
 }
