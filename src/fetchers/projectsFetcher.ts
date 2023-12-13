@@ -12,6 +12,7 @@ export async function fetchProjects(
 			`range[marked_at]=${year}-01-01,${year}-12-31` +
 			`&filter[marked]=true`,
 	);
+	let mates: Record<string, number> = {};
 	projects = projects.filter((p: any) => p.project.parent_id === null);
 	for (const project of projects) {
 		const { final_mark, status, marked_at } = project;
@@ -62,6 +63,22 @@ export async function fetchProjects(
 					logins,
 				],
 			);
+			for (const user of team.users) {
+				if (user.id === userId) {
+					continue;
+				}
+				if (mates[user.login] === undefined) {
+					mates[user.login] = 0;
+				}
+				mates[user.login]++;
+			}
 		}
+	}
+	for (const login in mates) {
+		await db.run(
+			`INSERT INTO projects_mate (login, collaborations) ` +
+				`VALUES (?, ?)`,
+			[login, mates[login]],
+		);
 	}
 }

@@ -60,4 +60,11 @@ export async function setupDb(db: Database) {
 			logins TEXT
 		)
 	`);
+	await db.run(`
+		CREATE TABLE projects_mate (
+			id INTEGER PRIMARY KEY,
+			login TEXT,
+			collaborations TEXT
+		)
+	`);
 }
