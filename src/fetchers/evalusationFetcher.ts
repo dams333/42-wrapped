@@ -27,7 +27,9 @@ async function fetchAsCorrector(
 			.map((user: any) => user.login)
 			.join(',');
 		const flag = scaleTeam.flag.name;
-		const feedback_rated = scaleTeam.feedbacks[0].rating;
+		const feedback_rated = scaleTeam.feedbacks.length
+			? scaleTeam.feedbacks[0].rating
+			: null;
 		const is_validated = scaleTeam.team['validated?'];
 		const project = sessions.find(
 			(session) => session.id === scaleTeam.team.project_session_id,
@@ -79,7 +81,9 @@ async function fetchAsCorrected(
 		const { id, filled_at, final_mark, comment, feedback } = scaleTeam;
 		const evaluated_at = filled_at;
 		const flag = scaleTeam.flag.name;
-		const feedback_rated = scaleTeam.feedbacks[0].rating;
+		const feedback_rated = scaleTeam.feedbacks.length
+			? scaleTeam.feedbacks[0].rating
+			: null;
 		const is_validated = scaleTeam.team['validated?'];
 		const project_id = scaleTeam.team.project_id;
 		const team_id = scaleTeam.team.id;

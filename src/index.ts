@@ -34,9 +34,9 @@ import { fetchEvaluations } from './fetchers/evalusationFetcher';
 			return;
 		}
 		setupDb(db);
-		// await fetchLocations(client, userId, year, db);
-		// await fetchAchievments(client, userId, year, db);
-		// await fetchProjects(client, userId, year, db);
+		await fetchLocations(client, userId, year, db);
+		await fetchAchievments(client, userId, year, db);
+		await fetchProjects(client, userId, year, db);
 		await fetchEvaluations(client, userId, year, db);
 	} catch (e) {
 		console.log(e);
