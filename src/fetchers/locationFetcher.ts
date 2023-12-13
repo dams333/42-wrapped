@@ -3,13 +3,13 @@ import { Database } from 'sqlite';
 
 export async function fetchLocations(
 	client: Client,
-	login: string,
+	userId: number,
 	year: number,
 	db: Database,
 ) {
 	const locations: any[] = await client.fetch(
 		'users/' +
-			login +
+			userId +
 			`/locations?range[begin_at]=${year}-01-01T00:00:00.000Z,${year}-12-31T23:59:59.999Z&filter[inactive]=true`,
 	);
 	for (const location of locations) {

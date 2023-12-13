@@ -21,4 +21,16 @@ export async function setupDb(db: Database) {
 			time INTEGER
 		)
 	`);
+	//Create an achievments_raw table with id, name, description, tier, kind, image, unlocked_at
+	await db.run(`
+		CREATE TABLE achievments_raw (
+			id INTEGER PRIMARY KEY,
+			name TEXT,
+			description TEXT,
+			tier TEXT,
+			kind TEXT,
+			image TEXT,
+			unlocked_at TEXT
+		)
+	`);
 }

@@ -3,6 +3,7 @@ import { Client } from '42.js';
 import { fetchLocations } from './fetchers/locationFetcher';
 import { open } from 'sqlite';
 import { setupDb } from './db';
+import { fetchAchievments } from './fetchers/achievmentsFetcher';
 
 (async function () {
 	const client = new Client(
@@ -11,6 +12,14 @@ import { setupDb } from './db';
 	);
 
 	const login = 'dhubleur';
+
+	const user = await client.users.get(login);
+	if (!user) {
+		console.log('user not found');
+		return;
+	}
+	const userId = user.id;
+
 	const year = 2023;
 
 	try {
@@ -23,7 +32,8 @@ import { setupDb } from './db';
 			return;
 		}
 		setupDb(db);
-		await fetchLocations(client, login, year, db);
+		// await fetchLocations(client, userId, year, db);
+		// await fetchAchievments(client, userId, year, db);
 	} catch (e) {
 		console.log(e);
 	}
