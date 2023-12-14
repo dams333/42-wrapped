@@ -7,6 +7,7 @@ import { fetchAchievments } from './fetchers/achievmentsFetcher';
 import { fetchProjects } from './fetchers/projectsFetcher';
 import { fetchEvaluations } from './fetchers/evaluationsFetcher';
 import { fetchEvents } from './fetchers/eventsFetcher';
+import { exportDatas } from './datasExporter';
 
 (async function () {
 	const client = new Client(
@@ -27,19 +28,25 @@ import { fetchEvents } from './fetchers/eventsFetcher';
 
 	try {
 		const db = await open('db.sqlite');
-		const rows = await db.all(
-			"SELECT name FROM sqlite_master WHERE type='table'",
-		);
-		if (rows.length > 0) {
-			console.log('db is not empty');
-			return;
-		}
-		setupDb(db);
+		// const rows = await db.all(
+		// 	"SELECT name FROM sqlite_master WHERE type='table'",
+		// );
+		// if (rows.length > 0) {
+		// 	console.log('db is not empty');
+		// 	return;
+		// }
+		// setupDb(db);
+
 		// await fetchLocations(client, userId, year, db);
 		// await fetchAchievments(client, userId, year, db);
 		// await fetchProjects(client, userId, year, db);
 		// await fetchEvaluations(client, userId, year, db);
-		await fetchEvents(client, userId, year, db);
+		// await fetchEvents(client, userId, year, db);
+
+		const datas = await exportDatas(db);
+		console.log(datas);
+
+		await db.close();
 	} catch (e) {
 		console.log(e);
 		return;
