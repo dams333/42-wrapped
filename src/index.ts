@@ -5,7 +5,7 @@ import { open } from 'sqlite';
 import { setupDb } from './db';
 import { fetchAchievments } from './fetchers/achievmentsFetcher';
 import { fetchProjects } from './fetchers/projectsFetcher';
-import { fetchEvaluations } from './fetchers/evalusationFetcher';
+import { fetchEvaluations } from './fetchers/evaluationsFetcher';
 
 (async function () {
 	const client = new Client(
