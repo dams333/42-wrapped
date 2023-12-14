@@ -109,4 +109,25 @@ export async function setupDb(db: Database) {
 			count INTEGER
 		)
 	`);
+	await db.run(`
+		CREATE TABLE events_raw (
+			id INTEGER PRIMARY KEY,
+			begin_at TEXT,
+			name TEXT,
+			location TEXT,
+			kind TEXT
+		)
+	`);
+	await db.run(`
+		CREATE TABLE events_kind (
+			kind TEXT PRIMARY KEY,
+			count INTEGER
+		)
+	`);
+	await db.run(`
+		CREATE TABLE events_locations (
+			location TEXT PRIMARY KEY,
+			count INTEGER
+		)
+	`);
 }
