@@ -9,6 +9,13 @@ datasource db {
 }
 
 model User {
-    id    Int    @id
-    login String @unique
+    id              Int              @id @default(autoincrement())
+    login           String           @unique
+    authIdentifiers AuthIdentifier[]
+}
+
+model AuthIdentifier {
+    identifier String @id @unique
+    user       User   @relation(fields: [userId], references: [id])
+    userId     Int
 }

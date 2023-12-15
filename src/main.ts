@@ -3,6 +3,8 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { WsAdapter } from '@nestjs/platform-ws';
 import { useContainer } from 'class-validator';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
