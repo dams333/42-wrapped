@@ -9,7 +9,7 @@
 ### Response
 ```json
 {
-  "url": "https://discord.com/api/oauth2/authorize?client_id=123456789&redirect_uri=https%3A%2F%2Fexample.com%2Fcallback&response_type=code&scope=identify%20guilds"
+  "url": "The url to redirect the user to"
 }
 ```
 ## POST /auth/callback?code=X
