@@ -91,20 +91,6 @@ authorization: Bearer [access_token]
 	}
 }
 ```
-## GET /stats/:login
-### Response if stats are not available
-```
-403 Forbidden
-```
-### Response if stats are available
-```json
-{
-	"login": "The login of the user",
-	"datas": {
-		"TODO": "to fill"
-	}
-}
-```
 # Settings
 ## GET /settings
 ### Response
