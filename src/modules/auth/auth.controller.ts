@@ -37,7 +37,7 @@ export class AuthController {
 			throw new BadRequestException('No code provided');
 		}
 		const user =
-			await this.intraService.client.auth_manager.response_auth_process(
+			await this.intraService.apiClient.auth_manager.response_auth_process(
 				(
 					await this.intraService.getAuthProcess(null)
 				).id,

@@ -14,14 +14,14 @@ export class IntraService {
 		);
 	}
 
-	get client(): Client {
+	get apiClient(): Client {
 		return this._client;
 	}
 
 	async getAuthProcess(url: string | null): Promise<AuthProcess> {
 		if (!this._auth_process && url) {
 			this._auth_process =
-				await this.client.auth_manager.init_auth_process(url, [
+				await this.apiClient.auth_manager.init_auth_process(url, [
 					'public',
 				]);
 		}
