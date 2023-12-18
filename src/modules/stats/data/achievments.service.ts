@@ -17,11 +17,15 @@ export class AchievmentsService {
 	async generateAchievments(user: User, year: number, datasId: number) {
 		console.log('Generating achievments for ' + user.login + '...');
 
-		const achievments_users: any[] = await this.apiClient.fetch(
+		let achievments_users: any[] = await this.apiClient.fetch(
 			'achievements_users?filter[user_id]=' +
 				user.id +
 				`&range[updated_at]=${year}-01-01T00:00:00.000Z,${year}-12-31T23:59:59.999Z` +
 				'&range[nbr_of_success]=1,1000',
+		);
+		// Remove the 'be a test of the API' achievment
+		achievments_users = achievments_users.filter(
+			(achievment_user) => achievment_user.achievement_id != 8,
 		);
 		let achievements_ids = achievments_users.map(
 			(achievment_user) => achievment_user.achievement_id,
