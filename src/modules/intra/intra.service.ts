@@ -18,13 +18,12 @@ export class IntraService {
 		return this._client;
 	}
 
-	async getAuthProcess(): Promise<AuthProcess> {
-		if (!this._auth_process) {
+	async getAuthProcess(url: string | null): Promise<AuthProcess> {
+		if (!this._auth_process && url) {
 			this._auth_process =
-				await this.client.auth_manager.init_auth_process(
-					process.env.FRONT_CALLBACK_URL,
-					['public'],
-				);
+				await this.client.auth_manager.init_auth_process(url, [
+					'public',
+				]);
 		}
 		return this._auth_process;
 	}

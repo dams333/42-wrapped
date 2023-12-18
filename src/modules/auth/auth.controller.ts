@@ -12,6 +12,7 @@ import { IntraService } from '../intra/intra.service';
 import { AuthService } from './auth.service';
 import { RefreshTokenDTO } from './DTO/RefreshToken.DTO';
 import { AuthGuard } from './guards/auth.guard';
+import { RedirectUrlDTO } from './DTO/RedirectUrl.DTO';
 
 @Controller('auth')
 export class AuthController {
@@ -20,9 +21,15 @@ export class AuthController {
 		private readonly authService: AuthService,
 	) {}
 
-	@Get()
-	async redirectToAuth() {
-		return { url: (await this.intraService.getAuthProcess()).url };
+	@Post()
+	async redirectToAuth(
+		@Body(new ValidationPipe()) redirectUrl: RedirectUrlDTO,
+	) {
+		return {
+			url: (
+				await this.intraService.getAuthProcess(redirectUrl.callback_url)
+			).url,
+		};
 	}
 
 	@Post('callback')
@@ -33,7 +40,7 @@ export class AuthController {
 		const user =
 			await this.intraService.client.auth_manager.response_auth_process(
 				(
-					await this.intraService.getAuthProcess()
+					await this.intraService.getAuthProcess(null)
 				).id,
 				code,
 			);
