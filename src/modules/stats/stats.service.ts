@@ -3,6 +3,7 @@ import { User } from '@prisma/client';
 import { AchievmentsService } from './data/achievments.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { LocationsService } from './data/locations.service';
+import { EventsService } from './data/events.service';
 
 @Injectable()
 export class StatsService {
@@ -12,6 +13,7 @@ export class StatsService {
 		private readonly achievmentsService: AchievmentsService,
 		private readonly prismaService: PrismaService,
 		private readonly locationsService: LocationsService,
+		private readonly eventsService: EventsService,
 	) {}
 
 	async generateStats(user: User) {
@@ -39,6 +41,11 @@ export class StatsService {
 				userInDb.datas.id,
 			),
 			this.locationsService.generateLocations(
+				user,
+				this.year,
+				userInDb.datas.id,
+			),
+			this.eventsService.generateEvents(
 				user,
 				this.year,
 				userInDb.datas.id,
