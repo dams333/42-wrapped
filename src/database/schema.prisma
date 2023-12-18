@@ -30,6 +30,7 @@ model UserDatas {
     year Int
 
     achievments AchivementUser[]
+    locations   Location[]
 }
 
 model AchivementUser {
@@ -52,4 +53,15 @@ model Achievment {
     tier           String
     kind           String
     AchivementUser AchivementUser[]
+}
+
+model Location {
+    id Int @id @default(autoincrement())
+
+    UserDatas   UserDatas @relation(fields: [userDatasId], references: [id])
+    userDatasId Int
+
+    host    String
+    beginAt DateTime
+    endAt   DateTime
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { AchievmentsService } from './data/achievments.service';
 import { PrismaService } from '../prisma/prisma.service';
+import { LocationsService } from './data/locations.service';
 
 @Injectable()
 export class StatsService {
@@ -10,6 +11,7 @@ export class StatsService {
 	constructor(
 		private readonly achievmentsService: AchievmentsService,
 		private readonly prismaService: PrismaService,
+		private readonly locationsService: LocationsService,
 	) {}
 
 	async generateStats(user: User) {
@@ -32,6 +34,11 @@ export class StatsService {
 		});
 		await Promise.all([
 			this.achievmentsService.generateAchievments(
+				user,
+				this.year,
+				userInDb.datas.id,
+			),
+			this.locationsService.generateLocations(
 				user,
 				this.year,
 				userInDb.datas.id,
