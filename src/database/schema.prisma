@@ -12,6 +12,7 @@ model User {
     id              Int              @id @default(autoincrement())
     login           String           @unique
     authIdentifiers AuthIdentifier[]
+    areDatasFetched Boolean          @default(false)
 }
 
 model AuthIdentifier {
