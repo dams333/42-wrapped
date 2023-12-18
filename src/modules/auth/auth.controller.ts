@@ -2,6 +2,7 @@ import {
 	BadRequestException,
 	Body,
 	Controller,
+	Param,
 	Post,
 	Query,
 	UseGuards,
@@ -43,6 +44,16 @@ export class AuthController {
 				).id,
 				code,
 			);
+		if (!user) {
+			throw new BadRequestException('No user found on 42 intranet');
+		}
+		return await this.authService.connectUser(user);
+	}
+
+	//TODO: Remove this route
+	@Post('dev/:login')
+	async devLogin(@Param('login') login: string) {
+		const user: any = await this.intraService.apiClient.users.get(login);
 		if (!user) {
 			throw new BadRequestException('No user found on 42 intranet');
 		}
