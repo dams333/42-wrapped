@@ -72,7 +72,6 @@ export class AuthController {
 	}
 
 	@Post('logout')
-	@UseGuards(AuthGuard)
 	async logout(@Body('refresh_token') refreshToken: string) {
 		return await this.authService.logout(refreshToken);
 	}
