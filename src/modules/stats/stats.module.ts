@@ -6,6 +6,7 @@ import { IntraModule } from '../intra/intra.module';
 import { PrismaModule } from '../prisma/prisma.module';
 import { LocationsService } from './data/locations.service';
 import { EventsService } from './data/events.service';
+import { ProjectsService } from './data/projects.service';
 
 @Module({
 	imports: [IntraModule, PrismaModule],
@@ -15,6 +16,7 @@ import { EventsService } from './data/events.service';
 		AchievmentsService,
 		LocationsService,
 		EventsService,
+		ProjectsService,
 	],
 	exports: [StatsService],
 })

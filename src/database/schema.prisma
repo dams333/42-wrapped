@@ -32,6 +32,7 @@ model UserDatas {
     achievments AchivementUser[]
     locations   Location[]
     EventUser   EventUser[]
+    ProjectUser ProjectUser[]
 }
 
 model AchivementUser {
@@ -85,4 +86,51 @@ model Event {
     location  String
     kind      String
     EventUser EventUser[]
+}
+
+model ProjectUser {
+    id Int @id @default(autoincrement())
+
+    UserDatas   UserDatas @relation(fields: [userDatasId], references: [id])
+    userDatasId Int
+
+    Project   Project @relation(fields: [projectId], references: [id])
+    projectId Int
+
+    finalMark       Int?
+    status          String
+    markedAt        DateTime
+    isValidated     Boolean
+    ProjectUserTeam ProjectUserTeam[]
+}
+
+model ProjectUserTeam {
+    id Int @id @default(autoincrement())
+
+    ProjectUser   ProjectUser @relation(fields: [projectUserId], references: [id])
+    projectUserId Int
+
+    name String
+
+    isLocked    Boolean
+    isValidated Boolean
+    isClosed    Boolean
+
+    status String
+
+    finalMark Int?
+    createdAt DateTime
+    lockedAt  DateTime?
+    closedAt  DateTime?
+
+    users String[]
+}
+
+model Project {
+    id Int @id @default(autoincrement())
+
+    name        String
+    slug        String
+    cursus      Int
+    ProjectUser ProjectUser[]
 }
