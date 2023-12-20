@@ -56,6 +56,7 @@ export class AchievmentsService {
 					image: achievment.image,
 				};
 			}),
+			skipDuplicates: true,
 		});
 		await this.prismaService.achivementUser.createMany({
 			data: achievments_users.map((achievment_user) => {
@@ -65,6 +66,7 @@ export class AchievmentsService {
 					unlockedAt: achievment_user.updated_at,
 				};
 			}),
+			skipDuplicates: true,
 		});
 		console.log('Generated achievments for ' + user.login + '!');
 		return {

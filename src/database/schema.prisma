@@ -83,7 +83,7 @@ model Event {
 
     name      String
     beginAt   DateTime
-    location  String
+    location  String?
     kind      String
     EventUser EventUser[]
 }
@@ -107,6 +107,7 @@ model ProjectUser {
 model ProjectUserTeam {
     id Int @id @default(autoincrement())
 
+    // TODO: Replace by many to many relation
     ProjectUser   ProjectUser @relation(fields: [projectUserId], references: [id])
     projectUserId Int
 

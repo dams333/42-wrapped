@@ -44,6 +44,7 @@ export class ProjectsService {
 					cursus: projectUser.cursus_ids[0],
 				};
 			}),
+			skipDuplicates: true,
 		});
 
 		await this.prismaService.projectUser.createMany({
@@ -58,6 +59,7 @@ export class ProjectsService {
 					isValidated: projectUser['validated?'] || false,
 				};
 			}),
+			skipDuplicates: true,
 		});
 
 		await this.prismaService.projectUserTeam.createMany({
@@ -79,6 +81,7 @@ export class ProjectsService {
 					};
 				});
 			}),
+			skipDuplicates: true,
 		});
 
 		console.log('Generated projects for ' + user.login + '!');
